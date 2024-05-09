@@ -18,9 +18,9 @@ public class Application05 {
         Statement stmt = null;
         ResultSet rset = null;
 
-        Scanner sc = new Scanner(System.in);
-        System.out.print("조회할 사번을 입력해주세요 : ");
-        int empId = sc.nextInt();
+//        Scanner sc = new Scanner(System.in);
+//        System.out.print("조회할 사번을 입력해주세요 : ");
+//        int empId = sc.nextInt();
         String query = "SELECT * FROM EMPLOYEE";
         // 사원 정보를 저장하기 위함
         ArrayList<EmployeeDTO> employees = new ArrayList<>();
@@ -32,7 +32,7 @@ public class Application05 {
             rset = stmt.executeQuery(query);
 
             while(rset.next()){
-                EmployeeDTO employeeDTO = null;
+                EmployeeDTO employeeDTO = new EmployeeDTO();
 
                 employeeDTO.setEmpId(rset.getString("EMP_ID"));
                 employeeDTO.setEmpName(rset.getString("EMP_NAME"));
