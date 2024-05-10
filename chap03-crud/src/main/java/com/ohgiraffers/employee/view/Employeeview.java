@@ -1,4 +1,4 @@
-package com.ohgiraffers.view;
+package com.ohgiraffers.employee.view;
 
 import java.util.Scanner;
 
@@ -28,7 +28,7 @@ public class Employeeview {
 
 
     // 현재 html의 화면을 암시하고 만든 것이다.
-    // view는 사용자에게 데이터를 입력받고 서버에 요청을 하며, 결과를 사용자에게 보여주기 위한 용도로 사용된다.
+    // view는 사용자에게 데이터를 입력받고 서버에 전달하며, 결과를 사용자에게 보여주기 위한 용도로 사용된다.
     public static void employeeViewAll(){
         System.out.println("사원 정보 전체 조회");
 
