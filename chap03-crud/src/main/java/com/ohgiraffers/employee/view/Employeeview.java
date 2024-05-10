@@ -13,9 +13,11 @@ public class EmployeeView {
 
     public static void run(){
         while (state){
-            System.out.println("화면 번호를 입력해주세요 : ");
-            System.out.println("1. 회원 전체보기");
+            System.out.println("1. 사원 전체보기");
             System.out.println("2. 사원 이름으로 조회하기");
+            System.out.println("3. 사원 정보 등록하기");
+            System.out.println("4. 사원 정보 수정하기");
+            System.out.print("화면 번호를 입력해주세요 : ");
             Scanner sc = new Scanner(System.in);
             int index = Integer.parseInt(sc.nextLine());
 
@@ -25,6 +27,12 @@ public class EmployeeView {
                     break;
                 case 2 :
                     employeeFindByName();
+                    break;
+                case 3:
+                    empInsert();
+                    break;
+                case 4:
+                    empUpdate();
                     break;
             }
             System.out.print("종료를 하시겠습니까? 말해 (yes Or no) 오타x 소문자만 : ");
@@ -70,7 +78,7 @@ public class EmployeeView {
         System.out.println("등록할 사원의 정보를 입력해주세요 ");
         System.out.print("사원의 번호를 입력해주세요 : ");
         emp.setEmpId(sc.nextLine());
-        System.out.println("사원의 이름을 입력해주세요 : ");
+        System.out.print("사원의 이름을 입력해주세요 : ");
         emp.setEmpName(sc.nextLine());
         System.out.print("사원의 주민번호를 입력해주세요 : ");
         emp.setEmpNo(sc.nextLine());
@@ -79,7 +87,36 @@ public class EmployeeView {
         System.out.print("사원의 급여를 입력해주세요 (S1,S2,S3,S4,S5,S6) : ");
         emp.setSalLevel(sc.nextLine());
 
-        String result = employeeService.empInsert(emp);
+        try {
+            String result = employeeService.empInsert(emp);
+            System.out.println(result);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // 업데이트
+    public static void empUpdate(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("변경할 사원번호를 입력하세요 : ");
+        String index = sc.nextLine();
+        EmployeeDTO emp = employeeService.empFindById(index);
+        
+        if(emp == null){
+            System.out.println("변경할 사원이 존재하지 않습니다.");
+            return;
+        }
+        System.out.println(emp);
+        System.out.print("변경할 이름을 입력해주세요.");
+        String name = sc.nextLine();
+        // 만약에 n개를 변경한다 하면 DTO를 만들어서 해주면 된다.
+
+        try {
+            EmployeeDTO modifyEmp = employeeService.empModify(name,index); //DTO면 name대신 DTO전
+            System.out.println(modifyEmp);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

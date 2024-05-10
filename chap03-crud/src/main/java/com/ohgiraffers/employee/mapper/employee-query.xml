@@ -43,4 +43,27 @@
          WHERE EMP_ID = ?
             AND ENT_YN = 'N'
     </entry>
+
+    <entry key="empInsert">
+        INSERT EMPLOYEE
+        (
+            EMP_ID,
+            EMP_NAME,
+            EMP_NO,
+            JOB_CODE,
+            SAL_LEVEL
+        )VALUES(
+            ?,
+            ?,
+            ?,
+            ?,
+            ?
+        )
+    </entry>
+
+    <entry key="empModify">
+        UPDATE EMPLOYEE
+            SET EMP_NAME = ?
+         WHERE EMP_ID = ?
+    </entry>
 </properties>

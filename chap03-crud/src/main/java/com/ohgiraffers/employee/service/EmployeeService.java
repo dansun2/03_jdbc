@@ -50,6 +50,34 @@ public class EmployeeService {
             throw new Exception("중복회원");
         }
 
-        String result = employeeRepository.empInsert(emp);
+        int result = employeeRepository.empInsert(emp);
+
+        if(result < 0){
+            throw new Exception("등록실패");
+        }
+        return (result > 0) ? "등록성공" : "등록실패"; //삼항연산자
+    }
+
+    public EmployeeDTO empFindById(String index) {
+        EmployeeDTO findEmp = employeeRepository.empFindById(index);
+        if(findEmp != null){
+            return findEmp;
+        }else{
+            return null;
+        }
+    }
+
+    public EmployeeDTO empModify(String name, String index) throws Exception {
+        if(name.equals("") || name == null){
+            throw new Exception("빈값 입력");
+        }
+
+        int result = employeeRepository.empModify(name, index);
+        if(result <0) {
+            throw new Exception("변경실패");
+        }
+
+        EmployeeDTO modifyEmp = employeeRepository.empFindById(index);
+        return modifyEmp;
     }
 }
