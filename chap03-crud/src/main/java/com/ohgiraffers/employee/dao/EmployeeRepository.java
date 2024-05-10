@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Properties;
+import static com.ohgiraffers.common.JDBCTemplate.*;
 
 public class EmployeeRepository {
     private Properties prop = new Properties(); // properties는 sql 설정파일
@@ -26,6 +27,6 @@ public class EmployeeRepository {
 
     public ArrayList employeeViewAll(){
         String query = prop.getProperty("employeeAll");
-        Connection con = JDBCTemplate.getConnection();
+        con = getConnection();
     }
 }
