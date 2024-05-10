@@ -29,16 +29,20 @@ public class EmployeeRepository {
         }
     }
 
-    public ArrayList employeeViewAll(){
+    public ArrayList employeeViewAll() {
         ArrayList arrayList = new ArrayList();
-        String query = pros.getProperty("employeeFindByName");
+
+        String query = pros.getProperty("employeeAll");
         con = getConnection();
+//        EmployeeDTO emp = new EmployeeDTO(); 왜 이거를 while안에 넣고 위에 ArrayList를 썼더라?
+
         try {
             pstmt = con.prepareStatement(query);
-            pstmt.setString(1, "name");
             rset = pstmt.executeQuery();
+
             while (rset.next()){
                 EmployeeDTO emp = new EmployeeDTO();
+
                 emp.setEmpId(rset.getString("EMP_ID"));
                 emp.setEmpName(rset.getString("EMP_NAME"));
                 emp.setPhone(rset.getString("PHONE"));
@@ -46,6 +50,7 @@ public class EmployeeRepository {
                 emp.setJobCode(rset.getString("JOB_CODE"));
                 emp.setSalary(rset.getInt("SALARY"));
                 emp.setEntYn(rset.getString("ENT_YN"));
+
                 arrayList.add(emp);
             }
         } catch (SQLException e) {
@@ -55,19 +60,20 @@ public class EmployeeRepository {
             close(pstmt);
             close(con);
         }
-
         return arrayList;
     }
 
     public EmployeeDTO employeeFindByName(String name) {
-        String query = pros.getProperty("employeeAll");
+        String query = pros.getProperty("employeeFindByName");
         con = getConnection();
         EmployeeDTO emp = new EmployeeDTO();
-
         try {
             pstmt = con.prepareStatement(query);
+            pstmt.setString(1, name);
             rset = pstmt.executeQuery();
-            if (rset.next()){
+
+            if (rset.next()) {
+                emp = new EmployeeDTO();
                 emp.setEmpId(rset.getString("EMP_ID"));
                 emp.setEmpName(rset.getString("EMP_NAME"));
                 emp.setPhone(rset.getString("PHONE"));
@@ -75,14 +81,16 @@ public class EmployeeRepository {
                 emp.setJobCode(rset.getString("JOB_CODE"));
                 emp.setSalary(rset.getInt("SALARY"));
                 emp.setEntYn(rset.getString("ENT_YN"));
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             close(rset);
             close(pstmt);
             close(con);
         }
+
         return emp;
     }
 
@@ -162,4 +170,5 @@ public class EmployeeRepository {
 
         return result;
     }
+
 }

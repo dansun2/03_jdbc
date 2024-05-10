@@ -17,20 +17,21 @@ public class EmployeeService {
     // service
     // 비즈니스의 도메인과 관련된 역할을 수행한다.
     // 데이터베이스와 연결된 작업을 수행한다.
-    public ArrayList employeeViewAll() throws Exception {
-        ArrayList employees = employeeRepository.employeeViewAll();
+    public ArrayList employeeViewAll() throws Exception { // 왜 View에서는 직접 예외처리를 하고 Service클래스에서는 예외처리를 위임했는지
+        ArrayList employees = employeeRepository.employeeViewAll(); // ArrayList를 또 생성한 이유는 코드 의도의 명확화?아님 안전한 예외처리?
 
+        // 0도 값이기 때문에 null일때는 아예 값이 없다는 뜻..그래서 null이면 조회 실패
         if(employees == null){
             throw new Exception("사원정보 조회실패");
         }
 
-        return employees;
+        return employees; // else로 써도 되는데 간소화때문에 쓰는건가?
     }
 
-    public EmployeeDTO employeeFineByName(String name) throws Exception {
+    public EmployeeDTO employeeFindByName(String name) throws Exception {
         //벨리데이션 체크? 전제조건으로 이름값이 존재하는지 확인
         //name이 입력되지 않은 경우
-        if(name == null && !name.equals("")){
+        if(name == null && name.equals("")){
             return null;
         }
 

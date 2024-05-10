@@ -9,7 +9,10 @@ import java.util.Scanner;
 
 public class EmployeeView {
     private static boolean state = true;
+
+    // EmployeeService 클래스의 메소드를 호출하기 위해 객체를 생성함.
     private static EmployeeService employeeService = new EmployeeService();
+
 
     public static void run(){
         while (state){
@@ -19,7 +22,7 @@ public class EmployeeView {
             System.out.println("4. 사원 정보 수정하기");
             System.out.print("화면 번호를 입력해주세요 : ");
             Scanner sc = new Scanner(System.in);
-            int index = Integer.parseInt(sc.nextLine());
+            int index = Integer.parseInt(sc.nextLine()); // 문자열을 int index에 넣기 위해 정수형으로 변환해줌
 
             switch (index){
                 case 1 :
@@ -51,8 +54,10 @@ public class EmployeeView {
     public static void employeeViewAll() {
         System.out.println("사원 정보 전체 조회");
 
+        // 예외처리(비정상적인 종료 등)를 위해 try/catch구문 사용
         try {
-            ArrayList emps =employeeService.employeeViewAll();
+            // 전체사원정보를 저장하기 위해 ArrayList생성해주고 변수명은 emps
+            ArrayList emps = employeeService.employeeViewAll();
             System.out.println(emps);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -65,7 +70,7 @@ public class EmployeeView {
         String name = sc.nextLine();
         EmployeeDTO emp = null;
         try {
-            emp = employeeService.employeeFineByName(name);
+            emp = employeeService.employeeFindByName(name);
             System.out.println(emp);
         } catch (Exception e) {
             throw new RuntimeException(e);
