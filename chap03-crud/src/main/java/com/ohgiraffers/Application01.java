@@ -1,9 +1,9 @@
 package com.ohgiraffers;
 
-import com.ohgiraffers.employee.view.Employeeview;
+import com.ohgiraffers.employee.view.EmployeeView;
 
 public class Application01 {
     public static void main(String[] args){
-        Employeeview.run();
+        EmployeeView.run();
     }
 }

@@ -1,38 +1,85 @@
 package com.ohgiraffers.employee.view;
 
+import com.ohgiraffers.employee.dto.EmpInsertDTO;
+import com.ohgiraffers.employee.dto.EmployeeDTO;
+import com.ohgiraffers.employee.service.EmployeeService;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Employeeview {
+public class EmployeeView {
     private static boolean state = true;
-
+    private static EmployeeService employeeService = new EmployeeService();
 
     public static void run(){
-        while(state) {
-            System.out.print("화면 번호를 입력해주세요 : ");
-            System.out.println("1. 화면 전체보기");
+        while (state){
+            System.out.println("화면 번호를 입력해주세요 : ");
+            System.out.println("1. 회원 전체보기");
+            System.out.println("2. 사원 이름으로 조회하기");
             Scanner sc = new Scanner(System.in);
-            int index = Integer.parseInt(sc.nextLine()); // 왜 굳이 integer로? nextInt쓰면 정수형으로 안되나?
+            int index = Integer.parseInt(sc.nextLine());
 
-            switch (index) {
-                case 1:
+            switch (index){
+                case 1 :
                     employeeViewAll();
                     break;
+                case 2 :
+                    employeeFindByName();
+                    break;
             }
-            System.out.print("종료를 하시겠습니까? 말해 (yes or no) 오타X 소문자만 : ");
+            System.out.print("종료를 하시겠습니까? 말해 (yes Or no) 오타x 소문자만 : ");
             String result = sc.nextLine();
+
             if(result.equals("yes")){
                 state = false;
+                sc.close();
             }
         }
-    }
 
+    }
 
     // 현재 html의 화면을 암시하고 만든 것이다.
     // view는 사용자에게 데이터를 입력받고 서버에 전달하며, 결과를 사용자에게 보여주기 위한 용도로 사용된다.
-    public static void employeeViewAll(){
+    public static void employeeViewAll() {
         System.out.println("사원 정보 전체 조회");
 
+        try {
+            ArrayList emps =employeeService.employeeViewAll();
+            System.out.println(emps);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    public static void employeeFindByName(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("조회할 사원의 이름을 입력하세요 : ");
+        String name = sc.nextLine();
+        EmployeeDTO emp = null;
+        try {
+            emp = employeeService.employeeFineByName(name);
+            System.out.println(emp);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void empInsert(){
+        Scanner sc = new Scanner(System.in);
+        EmpInsertDTO emp = new EmpInsertDTO();
+        System.out.println("등록할 사원의 정보를 입력해주세요 ");
+        System.out.print("사원의 번호를 입력해주세요 : ");
+        emp.setEmpId(sc.nextLine());
+        System.out.println("사원의 이름을 입력해주세요 : ");
+        emp.setEmpName(sc.nextLine());
+        System.out.print("사원의 주민번호를 입력해주세요 : ");
+        emp.setEmpNo(sc.nextLine());
+        System.out.print("사원의 직급을 입력해주세요 (대표,부사장,부장,차장,과장,대리,사원) : ");
+        emp.setJobCode(sc.nextLine());
+        System.out.print("사원의 급여를 입력해주세요 (S1,S2,S3,S4,S5,S6) : ");
+        emp.setSalLevel(sc.nextLine());
+
+        String result = employeeService.empInsert(emp);
+    }
 
 }

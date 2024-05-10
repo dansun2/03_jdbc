@@ -3,9 +3,30 @@
 
 <properties>
     <comment />
-    <entry key ="employeeAll">
+    <entry key="employeeAll">
         SELECT
-            *
+            EMP_ID,
+            EMP_NAME,
+            PHONE,
+            DEPT_CODE,
+            JOB_CODE,
+            SALARY,
+            ENT_YN
           FROM EMPLOYEE
+         WHERE ENT_YN = 'N'
+    </entry>
+
+    <entry key="employeeFindByName">
+        SELECT
+            EMP_ID,
+            EMP_NAME,
+            PHONE,
+            DEPT_CODE,
+            JOB_CODE,
+            SALARY,
+            ENT_YN
+           FROM EMPLOYEE
+         WHERE EMP_NAME = ?
+            AND ENT_YN = 'N'
     </entry>
 </properties>

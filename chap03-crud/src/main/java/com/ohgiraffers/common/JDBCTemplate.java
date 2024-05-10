@@ -1,5 +1,6 @@
 package com.ohgiraffers.common;
 
+import javax.xml.transform.Result;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -7,7 +8,7 @@ import java.util.Properties;
 
 public class JDBCTemplate {
 
-    public static Connection getConnection() {
+    public static Connection getConnection(){
         Connection con = null;
         Properties prop = new Properties();
 
@@ -16,9 +17,11 @@ public class JDBCTemplate {
 
             String driver = prop.getProperty("driver");
             String url = prop.getProperty("url");
+
             // 클래스가 존재하는지 확인하기 위함
             Class.forName(driver);
-            con = DriverManager.getConnection(url,prop);
+            con = DriverManager.getConnection(url, prop);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -32,7 +35,7 @@ public class JDBCTemplate {
 
     public static void close(Connection con){
         try {
-            if(con != null && con.isClosed()) {
+            if(con != null && !con.isClosed()){
                 con.close();
             }
         } catch (SQLException e) {
@@ -41,9 +44,8 @@ public class JDBCTemplate {
     }
 
     public static void close(PreparedStatement pstmt){
-        // ? // 매개변수를 갖냐 안갖냐 preparedStatement랑 Statement의 차이
         try {
-            if(pstmt != null && pstmt.isClosed()) {
+            if(pstmt != null && !pstmt.isClosed()){
                 pstmt.close();
             }
         } catch (SQLException e) {
@@ -53,7 +55,7 @@ public class JDBCTemplate {
 
     public static void close(ResultSet rset){
         try {
-            if(rset !=null && !rset.isClosed()) {
+            if(rset !=null && !rset.isClosed()){
                 rset.close();
             }
         } catch (SQLException e) {
@@ -61,3 +63,19 @@ public class JDBCTemplate {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
