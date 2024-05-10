@@ -29,4 +29,18 @@
          WHERE EMP_NAME = ?
             AND ENT_YN = 'N'
     </entry>
+
+    <entry key="employeeFindById">
+        SELECT
+            EMP_ID,
+            EMP_NAME,
+            PHONE,
+            DEPT_CODE,
+            JOB_CODE,
+            SALARY,
+            ENT_YN
+          FROM EMPLOYEE
+         WHERE EMP_ID = ?
+            AND ENT_YN = 'N'
+    </entry>
 </properties>

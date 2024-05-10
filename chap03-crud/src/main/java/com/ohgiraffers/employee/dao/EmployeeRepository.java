@@ -2,6 +2,7 @@ package com.ohgiraffers.employee.dao;
 
 import com.mysql.cj.jdbc.JdbcConnection;
 import com.ohgiraffers.common.JDBCTemplate;
+import com.ohgiraffers.employee.dto.EmpInsertDTO;
 import com.ohgiraffers.employee.dto.EmployeeDTO;
 
 import java.io.FileInputStream;
@@ -86,5 +87,42 @@ public class EmployeeRepository {
             close(con);
         }
         return emp;
+    }
+
+    public EmployeeDTO empFindById(String index){
+        String query = pros.getProperty("employeeFindById"); // 쿼리를 만든 이유는 데이터베이스 요청하려고
+        con = getConnection();
+        EmployeeDTO emp = null;
+
+        try {
+            pstmt = con.prepareStatement(query); // 트라이캐치 블럭까지 만들면 sql이 말하는 방법
+            pstmt.setString(1,index);
+            rset = pstmt.executeQuery();
+
+            if(rset.next()){
+                emp = new EmployeeDTO();
+                emp.setEmpId(rset.getString("EMP_ID"));
+                emp.setEmpName(rset.getString("EMP_NAME"));
+                emp.setPhone(rset.getString("PHONE"));
+                emp.setDeptCode(rset.getString("DEPT_CODE"));
+                emp.setJobCode(rset.getString("JOB_CODE"));
+                emp.setSalary(rset.getInt("SALARY"));
+                emp.setEntYn(rset.getString("ENT_YN"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally{
+            close(con);
+            close(pstmt);
+            close(rset);
+        }
+        return emp;
+    }
+
+    public String empInsert(EmpInsertDTO emp) {
+        // 값을 추가
+        // connection
+        con = getConnection();
+
     }
 }
