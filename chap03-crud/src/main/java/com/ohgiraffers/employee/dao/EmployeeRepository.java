@@ -16,15 +16,22 @@ import static com.ohgiraffers.common.JDBCTemplate.*;
 * */
 public class EmployeeRepository {
 
-    private Properties pros =new Properties();
+    private Properties pros =new Properties(); // .properties파일을 저장할 객체 생성. 변수명 pros
+
+    // 변수를 먼저 선언한 후에 나중에 할당할 값만 설정하면 돼서 미리(?) 선언함.
+    // null값인 이유는 생성해뒀다가 필요할때만 사용하기때문에 리소스를 효율적으로 관리함
+    // 대신 사용이 끝나면 close를 꼭 해줘야 함.
+    // 데이터베이스랑 직접적으로 연결되기 때문에 캡슐화를 위해 private으로 설정
     private Connection con = null;
     private PreparedStatement pstmt = null;
     private ResultSet rset = null;
 
+
     public EmployeeRepository() {
         try {
+            // employee-query.xml 파일을 읽어서 properties 객체에 로드
             this.pros.loadFromXML(new FileInputStream("src/main/java/com/ohgiraffers/employee/mapper/employee-query.xml"));
-        } catch (IOException e) {
+        } catch (IOException e) {  // 파일 읽기 오류가 발생하면 RuntimeException으로 변환하여 예외를 던짐
             throw new RuntimeException(e);
         }
     }
