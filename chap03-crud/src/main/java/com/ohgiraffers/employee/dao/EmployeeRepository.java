@@ -22,6 +22,7 @@ public class EmployeeRepository {
     // null값인 이유는 생성해뒀다가 필요할때만 사용하기때문에 리소스를 효율적으로 관리함
     // 대신 사용이 끝나면 close를 꼭 해줘야 함.
     // 데이터베이스랑 직접적으로 연결되기 때문에 캡슐화를 위해 private으로 설정
+    // 데이터베이스 연결 및 쿼리 실행에 필요한 리소스를 나타내는 객체
     private Connection con = null;
     private PreparedStatement pstmt = null;
     private ResultSet rset = null;
@@ -36,6 +37,7 @@ public class EmployeeRepository {
         }
     }
 
+    // 전체조
     public ArrayList employeeViewAll() {
         ArrayList arrayList = new ArrayList();
 

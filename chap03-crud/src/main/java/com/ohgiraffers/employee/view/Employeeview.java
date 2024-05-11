@@ -22,7 +22,7 @@ public class EmployeeView {
             System.out.println("4. 사원 정보 수정하기");
             System.out.print("화면 번호를 입력해주세요 : ");
             Scanner sc = new Scanner(System.in);
-            int index = Integer.parseInt(sc.nextLine()); // 문자열을 int index에 넣기 위해 정수형으로 변환해줌
+            int index = Integer.parseInt(sc.nextLine()); // 문자열을 int index에 넣기 위해 정수형으로 강제 변환해줌
 
             switch (index){
                 case 1 :
