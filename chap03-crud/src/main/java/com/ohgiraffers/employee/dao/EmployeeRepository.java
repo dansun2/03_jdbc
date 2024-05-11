@@ -16,6 +16,9 @@ import static com.ohgiraffers.common.JDBCTemplate.*;
 * */
 public class EmployeeRepository {
 
+    // 자바에서 특정한 목적을 위해 키와 값의 쌍으로 이루어진 집합을 관리하는 클래스
+    // 키와 값을 문자열로 제한함
+    // 주로 load 메서드를 사용하여 파일에서 설정을 로드함, getProper1ty() 메서드를 사용하여 지정된 키에 대한 값을 검색
     private Properties pros =new Properties(); // .properties파일을 저장할 객체 생성. 변수명 pros
 
     // 변수를 먼저 선언한 후에 나중에 할당할 값만 설정하면 돼서 미리(?) 선언함.
@@ -37,20 +40,20 @@ public class EmployeeRepository {
         }
     }
 
-    // 전체조
+    // 전체조회
     public ArrayList employeeViewAll() {
         ArrayList arrayList = new ArrayList();
 
-        String query = pros.getProperty("employeeAll");
+        String query = pros.getProperty("employeeAll"); // 전체검색 리소스?
         con = getConnection();
 //        EmployeeDTO emp = new EmployeeDTO(); 왜 이거를 while안에 넣고 위에 ArrayList를 썼더라?
 
         try {
-            pstmt = con.prepareStatement(query);
-            rset = pstmt.executeQuery();
+            pstmt = con.prepareStatement(query); // 이해안감
+            rset = pstmt.executeQuery(); // 이해안감
 
             while (rset.next()){
-                EmployeeDTO emp = new EmployeeDTO();
+                EmployeeDTO emp = new EmployeeDTO(); // 밑에 각 행의 정보를 저장하기 위해 새로운 객체 생성
 
                 emp.setEmpId(rset.getString("EMP_ID"));
                 emp.setEmpName(rset.getString("EMP_NAME"));
@@ -60,16 +63,16 @@ public class EmployeeRepository {
                 emp.setSalary(rset.getInt("SALARY"));
                 emp.setEntYn(rset.getString("ENT_YN"));
 
-                arrayList.add(emp);
+                arrayList.add(emp); // 위에서 생성한 arrayList에 emp객체를 넣어줌
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        }finally { // 메모리가 누수되니 꼭 닫아주자
             close(rset);
             close(pstmt);
             close(con);
         }
-        return arrayList;
+        return arrayList; // 메소드 결과를 반환해서 employeeViewAll를 호출한 곳으로 전달함
     }
 
     public EmployeeDTO employeeFindByName(String name) {
