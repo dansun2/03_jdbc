@@ -2,6 +2,8 @@ package com.ohgiraffers.employee.dto;
 
 import java.util.Date;
 
+//DTO는 데이터 전송 객체(Data Transfer Object)의 약자로, 주로 데이터베이스와 사용자 인터페이스 사이에서 데이터를 전송하기 위해 사용
+//일반적으로는 필드, 생성자, getter 및 setter 메소드로 구성
 public class EmployeeDTO {
     private String empId;
     private String empName;
