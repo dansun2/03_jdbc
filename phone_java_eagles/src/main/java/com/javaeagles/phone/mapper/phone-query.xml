@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+    <comment />
+    <entry key="phoneAll">
+        SELECT
+        UI.USER_CODE,
+        UI.USER_NAME,
+        UI.USER_EMAIL,
+        UI.USER_MEMO,
+        UI.USER_GROUP,
+        PI.PHONE,
+        PI.PHONE_NAME
+        FROM USER_INFO AS UI
+        JOIN PHONE_INFO AS PI
+        ON UI.USER_CODE = PI.USER_CODE
+        WHERE USER_STATUS = 'Y'
+    </entry>
+
+    <entry key="phoneFindByName">
+        SELECT
+        UI.USER_CODE,
+        UI.USER_NAME,
+        UI.USER_EMAIL,
+        UI.USER_MEMO,
+        UI.USER_GROUP,
+        PI.PHONE,
+        PI.PHONE_NAME
+        FROM USER_INFO AS UI
+        JOIN PHONE_INFO AS PI
+        ON UI.USER_CODE = PI.USER_CODE
+        WHERE USER_NAME = ?
+        AND USER_STATUS = 'Y'
+    </entry>
+
+    <entry key="phoneFindById">
+        SELECT
+        UI.USER_CODE,
+        UI.USER_NAME,
+        UI.USER_EMAIL,
+        UI.USER_MEMO,
+        UI.USER_GROUP,
+        PI.PHONE,
+        PI.PHONE_NAME
+        FROM USER_INFO AS UI
+        JOIN PHONE_INFO AS PI
+        ON UI.USER_CODE = PI.USER_CODE
+        WHERE UI.USER_CODE = ?
+        AND USER_STATUS = 'Y'
+    </entry>
+
+    <entry key="phoneInsert">
+        insert all
+        into user_info(user_nsme, user_email, user_memo, user_group)
+        values(?, ?, ?, ?)
+        into
+        phone_info(phone, phone_name)
+        values(?, ?)
+<!--        select * from dual-->
+
+<!--        INSERT INTO user_info-->
+<!--        (-->
+<!--            USER_NAME,-->
+<!--            USER_EMAIL,-->
+<!--            USER_MEMO,-->
+<!--            USER_GROUP-->
+<!--        )-->
+
+<!--        VALUES-->
+<!--        (-->
+<!--            ?,-->
+<!--            ?,-->
+<!--            ?,-->
+<!--            ?-->
+<!--        )-->
+
+<!--        INSERT INTO phone_info-->
+<!--        (-->
+<!--            USER_CODE,-->
+<!--            PHONE,-->
+<!--            PHONE_NAME-->
+<!--        )-->
+
+<!--        VALUES-->
+<!--        (-->
+<!--            LAST_INSERT_ID(),-->
+<!--            ?,-->
+<!--            ?-->
+<!--        )-->
+
+    </entry>
+    <entry key="phoneModify">
+        UPDATE USER_INFO
+        SET USER_NAME = ?
+        WHERE USER_CODE = ?
+    </entry>
+
+    <entry key="phoneDelete">
+        DELETE
+          FROM PHONE_INFO
+         WHERE USER_CODE = ?
+    </entry>
+
+</properties>
