@@ -1,5 +1,7 @@
 package com.ohgiraffers.employee.dto;
 
+// 새로운 직원의 정보를 입력하고 전송하는 기능만 갖고 있는 클래스
+// 이렇게 따로 빼두면 직원정보를 입력해야 할 때 다른 곳에서도 손쉽게 사용 가능
 public class EmpInsertDTO {
     @Override
     public String toString() {
