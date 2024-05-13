@@ -8,6 +8,7 @@ import static com.javaeagles.phone.controller.PhoneController.*;
 
 public class PhoneView {
     private static boolean state = true;
+
     private static PhoneController phoneController = new PhoneController();
 
     public static void run(){
