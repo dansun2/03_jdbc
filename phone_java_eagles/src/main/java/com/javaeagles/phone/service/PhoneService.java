@@ -19,7 +19,7 @@ public class PhoneService {
         ArrayList phone = phoneRepository.phoneViewAll();
 
         if(phone == null){
-            throw new Exception("사원정보 조회실패");
+            throw new Exception("정보 조회실패");
         }
 
         return phone;
@@ -28,7 +28,8 @@ public class PhoneService {
     public PhoneDTO phoneFindByName(String name) throws Exception {
         // name이 입력되지 않은 경우
         if(name == null || name.equals("")){
-            return null;
+            System.out.println("정보 조회 실패");
+//            return null;
         }
 
         PhoneDTO ph = phoneRepository.phoneFindByName(name);
@@ -43,16 +44,18 @@ public class PhoneService {
         // 서비스는 아래와 같이 우리의 비즈니스 로직에 맞는 유효성을 검사한다.
         // 아래는 사원의 번호가 중복되는 것을 확인하고 만약 중복이라면 등록을 취소해야한다.
         PhoneDTO findPh = phoneRepository.phoneFindById(String.valueOf(ph.getUserCode()));
+        // 문자열로 강제 형변환 해주는 것.
 
         if(findPh != null){
             throw new Exception("중복회원");
         }
+        // null 조건 추가
 
         int result = phoneRepository.phoneInsert(ph);
 
-        if(result < 0){
-            throw new Exception("등록실패");
-        }
+//        if(result < 0){
+//            throw new Exception("등록실패");
+//        }
 
         return (result > 0) ? "등록성공" : "등록실패";
     }
@@ -79,21 +82,20 @@ public class PhoneService {
         PhoneDTO modifyPh = phoneRepository.phoneFindById(index);
         return modifyPh;
     }
+    public PhoneDTO phoneDelete (String name) throws Exception {
+        PhoneDTO findPh = phoneRepository.phoneFindByName(name);
+//        if(findPh == null) {
+//            throw new Exception("삭제할 전화번호가 존재하지 않습니다.");
+//        }
 
-    //*******
-    //*******
-    public PhoneDTO phoneDelete (String index) throws Exception {
-        PhoneDTO findPH = phoneRepository.phoneFindById(index);
-        if(findPH != null) {
-            throw new Exception("전화번호가 존재하지 않습니다.");
-        }
-
-        int result = phoneRepository.phoneDelete(index);
+        int result = phoneRepository.phoneDelete(name);
         if(result < 0 ) {
             throw new Exception("전화번호 삭제 실패");
         }
 
-        PhoneDTO deletePh = phoneRepository.phoneFindById(index);
+        PhoneDTO deletePh = phoneRepository.phoneFindById(name);
         return deletePh;
     }
+
+
 }

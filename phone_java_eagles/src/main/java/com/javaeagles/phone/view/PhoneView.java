@@ -20,6 +20,7 @@ public class PhoneView {
             System.out.print("화면 번호를 입력해주세요 : ");
             Scanner sc = new Scanner(System.in);
             int index = Integer.parseInt(sc.nextLine());
+            // int로 받으면 버퍼 남음 강제 형변환 줘야 됨
 
             switch (index){
                 case 1 :
@@ -38,10 +39,16 @@ public class PhoneView {
                     phoneDelete();
                     break;
             }
-            System.out.print("종료를 하시겠습니까? (yes Or no) 오타x 소문자만 : ");
+            System.out.print("종료를 하시겠습니까? (yes Or no) : ");
             String result = sc.nextLine();
-
-            if(result.equalsIgnoreCase("yes")){ //*******
+            // equalsIgnoreCase : 대소문자 구분 안해준다.
+            if(result.equalsIgnoreCase("yes")){
+                state = false;
+                sc.close();
+            } else if (result.equalsIgnoreCase("no")) {
+                state = true;
+            }else {
+                System.out.println("잘못 입력하셨습니다");
                 state = false;
                 sc.close();
             }

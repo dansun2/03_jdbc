@@ -91,15 +91,13 @@ public class PhoneDTO {
 
     @Override
     public String toString() {
-        return "PhoneDTO{" +
-                "userCode=" + userCode +
-                ", userName='" + userName + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                ", userMemo='" + userMemo + '\'' +
-                ", userGroup='" + userGroup + '\'' +
-                ", phoneCode='" + phoneCode + '\'' +
-                ", phoneName='" + phoneName + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+        return " 단축번호 = " + userCode +
+                " 이름 = '" + userName + '\'' +
+                " email = '" + userEmail + '\'' +
+                " Memo = '" + userMemo + '\'' +
+                " Group = '" + userGroup + '\'' +
+                " phone = '" + phone + '\n';
+        //", phoneCode = '" + phoneCode + '\'' +
+        //", phoneName = '" + phoneName + '\'' +
     }
 }

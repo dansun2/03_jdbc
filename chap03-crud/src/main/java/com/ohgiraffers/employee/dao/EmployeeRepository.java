@@ -49,8 +49,8 @@ public class EmployeeRepository {
 //        EmployeeDTO emp = new EmployeeDTO(); 왜 이거를 while안에 넣고 위에 ArrayList를 썼더라?
 
         try {
-            pstmt = con.prepareStatement(query); // 이해안감
-            rset = pstmt.executeQuery(); // 이해안감
+            pstmt = con.prepareStatement(query); // xml ?
+            rset = pstmt.executeQuery(); // 쿼리를 실행시켜서 rset에 넣어준다.
 
             while (rset.next()){
                 EmployeeDTO emp = new EmployeeDTO(); // 밑에 각 행의 정보를 저장하기 위해 새로운 객체 생성
