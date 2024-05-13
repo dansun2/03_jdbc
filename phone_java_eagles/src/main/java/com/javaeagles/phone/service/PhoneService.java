@@ -4,6 +4,7 @@ import com.javaeagles.phone.dao.PhoneRepository;
 import com.javaeagles.phone.dto.PhoneDTO;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PhoneService {
     private static PhoneRepository phoneRepository;
@@ -49,6 +50,7 @@ public class PhoneService {
         if(findPh != null){
             throw new Exception("중복회원");
         }
+
         // null 조건 추가
 
         int result = phoneRepository.phoneInsert(ph);
