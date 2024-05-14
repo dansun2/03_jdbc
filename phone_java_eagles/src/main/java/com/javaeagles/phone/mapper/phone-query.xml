@@ -93,8 +93,8 @@
 
     <entry key="phoneDelete">
         DELETE
-          FROM PHONE_INFO
-         WHERE USER_CODE IN (SELECT USER_CODE FROM USER_INFO WHERE USER_NAME = ?)
+        FROM PHONE_INFO
+        WHERE USER_CODE IN (SELECT USER_CODE FROM USER_INFO WHERE USER_NAME = ?)
     </entry>
 
 </properties>

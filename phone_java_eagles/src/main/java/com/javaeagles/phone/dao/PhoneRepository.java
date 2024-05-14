@@ -123,13 +123,10 @@ public class PhoneRepository {
         String query = pros.getProperty("phoneInsert");
         String query2 = pros.getProperty("phoneInsert2");
         con = getConnection();
-//        PreparedStatement pstmt1 = null;
-//        PreparedStatement pstmt2 = null;
         int result1 = 0;
         int result2 = 0;
 
         try {
-//            con = getConnection();
 
             pstmt = con.prepareStatement(query);
 

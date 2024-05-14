@@ -27,19 +27,29 @@ public class PhoneController {
 
     public static void phoneFindByName(){
         Scanner sc = new Scanner(System.in);
-        System.out.print("이름을 입력하세요 : ");
-        String name = sc.nextLine();
+
         PhoneDTO ph = null; // 강제 초기화
 
-
         try {
+            System.out.print("이름을 입력하세요 : ");
+            String name = sc.nextLine();
             ph = phoneService.phoneFindByName(name);
-            System.out.println(ph);
+
+            if(name != null && name.trim().isEmpty()){    // trim() :
+                System.out.println("공백입니다.");
+
+            }else if(ph.getUserName() != null){
+                System.out.println(ph);
+            }else{
+                System.out.println("등록된 이름이 없습니다. 다시 입력해주세요.");
+
+            }
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
 
     public static void phoneInsert(){
         Scanner sc = new Scanner(System.in);
@@ -62,6 +72,7 @@ public class PhoneController {
         ph.setUserMemo(sc.nextLine());
         System.out.print("그룹 : ");
         ph.setUserGroup(sc.nextLine());
+
         while (true) {
             System.out.print("전화번호 : ");
             String phone = sc.nextLine();
@@ -86,6 +97,7 @@ public class PhoneController {
 
 
 
+
     public static void phoneUpdate() {
         Scanner sc = new Scanner(System.in);
         System.out.println("변경할 단축번호를 입력하세요");
@@ -97,11 +109,19 @@ public class PhoneController {
             return;
         }
         System.out.println(ph);
-        System.out.println("변경할 이름을 입력해주세요");
-        String name = sc.nextLine();
+
         try {
-            PhoneDTO modifyEmp = phoneService.phoneModify(name, index);
-            System.out.println(modifyEmp);
+            System.out.print("변경할 이름을 입력해주세요 : ");
+            String name = sc.nextLine();
+
+            if(name != null && name.trim().isEmpty()) {    // trim() :
+                System.out.println("공백입니다.");
+            }
+            else{
+                PhoneDTO modifyEmp = phoneService.phoneModify(name, index);
+                System.out.println(modifyEmp);
+            }
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -121,7 +141,7 @@ public class PhoneController {
             throw new RuntimeException(e);
         }
         if(ph == null) {
-           System.out.println("삭제할 전화번호가 존재하지 않습니다.");
+            System.out.println("삭제할 전화번호가 존재하지 않습니다.");
         }else {
             System.out.print("삭제하시겠습니까? ( yes / no ) : ");
             String check = sc.nextLine();
