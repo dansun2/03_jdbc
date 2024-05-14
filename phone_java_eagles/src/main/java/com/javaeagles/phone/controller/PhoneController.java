@@ -35,7 +35,7 @@ public class PhoneController {
             String name = sc.nextLine();
             ph = phoneService.phoneFindByName(name);
 
-            if(name != null && name.trim().isEmpty()){    // trim() :
+            if(name == null || name.trim().isEmpty()){    // trim() :
                 System.out.println("공백입니다.");
 
             }else if(ph.getUserName() != null){
@@ -114,7 +114,7 @@ public class PhoneController {
             System.out.print("변경할 이름을 입력해주세요 : ");
             String name = sc.nextLine();
 
-            if(name != null && name.trim().isEmpty()) {    // trim() :
+            if(name == null || name.trim().isEmpty()) {    // trim() :
                 System.out.println("공백입니다.");
             }
             else{
